@@ -6,8 +6,8 @@ exports.process = async (req) => {
 
 
     switch (req.body.functionName) {
-        case ('shane'):
-            response = await shane(req)
+        case ('divideAI1'):
+            response = await divideAI1(req)
             deferred.resolve(response)
             break
         case ('shane1'):
@@ -19,7 +19,8 @@ exports.process = async (req) => {
             deferred.resolve(response)
             break
         default:
-            deferred.reject({ error: 'invalid functionName' })
+            req.body.error = {error: 'unhandled functionName'}
+            deferred.reject(req)
     }
     req.body = { modified: 'yes' }
     deferred.resolve(req)
@@ -40,7 +41,7 @@ function shane1(req) {
     return deferred.promise
 }
 
-function shane2(req) {
+function divideAI1(req) {
     var deferred = Q.defer()
     let payload = req.body.payload
     payload.AI1 = parseInt(payload.AI1) / 2
