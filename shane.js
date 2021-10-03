@@ -43,7 +43,7 @@ function shane1(req) {
 function shane2(req) {
     var deferred = Q.defer()
     let payload = req.body.payload
-    payload.AI1 = parseInt(payload.AI1) * 2
+    payload.AI1 = parseInt(payload.AI1) * 3
     deferred.resolve({payload: payload})
     return deferred.promise
 }
