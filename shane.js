@@ -19,11 +19,9 @@ exports.process = async (req) => {
             deferred.resolve(response)
             break
         default:
-            req.body.error = {error: 'unhandled functionName'}
-            deferred.reject(req)
+            req.body.payload.error = {error: 'unhandled functionName'}
+            deferred.reject({payload: req.body.payload})
     }
-    req.body = { modified: 'yes' }
-    deferred.resolve(req)
     return deferred.promise
 }
 
